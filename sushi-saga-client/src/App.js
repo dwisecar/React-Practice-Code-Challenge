@@ -37,10 +37,17 @@ class App extends Component {
   }
 
   handleMore = () => {
-    this.setState((prevState) => ({
-      displayedSushi: prevState.sushi.slice(prevState.renderPoint + 4, prevState.renderPoint + 8),
-      renderPoint: prevState.renderPoint + 4
-    }))
+    if(this.state.sushi.length - this.state.renderPoint <= 4) {
+      this.setState((prevState) => ({
+        displayedSushi: prevState.sushi.slice(0,4),
+        renderPoint: 0
+      }))
+    } else {
+      this.setState((prevState) => ({
+        displayedSushi: prevState.sushi.slice(prevState.renderPoint + 4, prevState.renderPoint + 8),
+        renderPoint: prevState.renderPoint + 4
+      }))
+    }
   }
 
   checkIfSushiEaten = sushi => {    
@@ -49,6 +56,12 @@ class App extends Component {
     }else{
       return false
     }
+  }
+
+  addMoney = amount => {
+    this.setState((prevState) => ({
+      money: prevState.money + parseInt(amount)
+    }))
   }
 
   render() {
@@ -63,7 +76,8 @@ class App extends Component {
         <Table 
           sushi={this.state.sushi} 
           sushiEaten={this.state.sushiEaten}
-          money={this.state.money}          
+          money={this.state.money} 
+          addMoney={this.addMoney}         
         />
       </div>
     );

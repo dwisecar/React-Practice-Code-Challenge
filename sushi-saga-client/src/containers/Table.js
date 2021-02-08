@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react'
+import Form from '../components/Form'
  
 const Table = (props) => {
 
@@ -13,14 +14,10 @@ const Table = (props) => {
       <h1 className="remaining">
         You have: ${ props.money } remaining!
       </h1>
+      <Form addMoney={props.addMoney}/>
       <div className="table">
         <div className="stack">
           {
-            /* 
-               renderPlates takes an array 
-               and renders an empty plate
-               for every element in the array
-            */
             renderPlates(props.sushiEaten )
           }
         </div>
